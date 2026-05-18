@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Shadcn CSS variables + EmpCo-Lupe brand colors.
+ * Brand: dark base #0a0a0a with cyan accent #00D9FF (matches friedemann-schuetz.de).
+ * Severity scale: high=red, med=amber, low=blue, clean=green.
+ */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --primary: 188 100% 50%;        /* cyan #00D9FF */
+    --primary-foreground: 222 47% 5%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 188 100% 50%;
+    --radius: 0.5rem;
+
+    --sev-high: 0 84% 50%;          /* red */
+    --sev-med: 35 92% 50%;          /* amber */
+    --sev-low: 217 91% 60%;         /* blue */
+    --sev-clean: 142 71% 45%;       /* green */
+  }
+
+  .dark {
+    --background: 0 0% 4%;          /* near-black */
+    --foreground: 210 40% 98%;
+    --card: 0 0% 7%;
+    --card-foreground: 210 40% 98%;
+    --primary: 188 100% 50%;
+    --primary-foreground: 222 47% 5%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 188 100% 50%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/*
+ * Severity utility classes for side-panel and (mirrored) highlight CSS.
+ */
+@layer components {
+  .badge-sev {
+    @apply inline-flex items-center rounded-md px-2 py-0.5 text-xs font-semibold;
+  }
+  .badge-sev-high {
+    @apply bg-[hsl(var(--sev-high))]/15 text-[hsl(var(--sev-high))];
+  }
+  .badge-sev-med {
+    @apply bg-[hsl(var(--sev-med))]/15 text-[hsl(var(--sev-med))];
+  }
+  .badge-sev-low {
+    @apply bg-[hsl(var(--sev-low))]/15 text-[hsl(var(--sev-low))];
+  }
+  .badge-sev-clean {
+    @apply bg-[hsl(var(--sev-clean))]/15 text-[hsl(var(--sev-clean))];
+  }
+}

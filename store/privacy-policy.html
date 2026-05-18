@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>Datenschutz — EmpCo-Lupe (Chrome Extension) · Friedemann Schütz</title>
+<meta name="description" content="Datenschutzerklärung der EmpCo-Lupe Chrome Extension. Welche Daten werden an die Prüf-API gesendet, welche bleiben lokal.">
+<style>
+  :root { --bg:#0a0a0a; --text:#e0e0e0; --dim:#a0a0a0; --accent:#00D9FF; --card:#1a1a1a; --border:#2a2a2a; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;font-size:16px;}
+  .wrap{max-width:780px;margin:0 auto;padding:48px 24px 96px;}
+  header{border-bottom:1px solid var(--border);padding-bottom:24px;margin-bottom:32px;}
+  .eyebrow{color:var(--accent);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;}
+  h1{font-size:34px;font-weight:700;letter-spacing:-0.02em;margin:8px 0 12px;}
+  .meta{color:var(--dim);font-size:14px;}
+  .meta a{color:var(--accent);text-decoration:none;}
+  .meta a:hover{text-decoration:underline;}
+  h2{font-size:22px;font-weight:700;letter-spacing:-0.01em;margin:40px 0 12px;color:#fff;}
+  h3{font-size:16px;font-weight:600;margin:24px 0 8px;color:var(--accent);}
+  p{margin:12px 0;}
+  ul,ol{margin:12px 0 12px 24px;}
+  li{margin:6px 0;}
+  strong{color:#fff;}
+  code{background:var(--card);padding:2px 6px;border-radius:3px;font-size:0.9em;color:var(--accent);font-family:'SF Mono','Cascadia Code',Consolas,monospace;}
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;}
+  th{text-align:left;padding:10px 12px;background:var(--card);border-bottom:2px solid var(--accent);color:#fff;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;}
+  td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--dim);}
+  td strong, td code{color:var(--text);}
+  hr{border:0;border-top:1px solid var(--border);margin:48px 0 24px;}
+  footer{font-size:13px;color:var(--dim);}
+  footer a{color:var(--accent);text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+  .back{display:inline-flex;align-items:center;gap:6px;margin-top:24px;color:var(--accent);text-decoration:none;font-size:14px;}
+  .back:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">EmpCo-Lupe · Datenschutz</div>
+    <h1>Datenschutzerklärung</h1>
+    <p class="meta">Stand: 18. Mai 2026 · Betreiber: Friedemann Schütz, Essen · <a href="mailto:f.schuetz@posteo.de">f.schuetz@posteo.de</a></p>
+  </header>
+
+  <p>Die EmpCo-Lupe ist eine kostenlose Browser-Extension zur Überprüfung von Marketing-Texten auf Greenwashing-Risiken gemäß EU-Richtlinie 2024/825 (EmpCo) und dem deutschen UWG.</p>
+  <p>Diese Erklärung beschreibt vollständig, welche Daten die Extension verarbeitet, wohin sie gehen und was nicht passiert.</p>
+
+  <h2>1. Welche Daten werden verarbeitet?</h2>
+
+  <h3>Lokal (in deinem Browser, gehen nicht raus)</h3>
+  <ul>
+    <li><strong>Einstellungen</strong>: Sprache, Sektor-Hint, Auto-Hervorhebung an/aus, Skip-Liste — gespeichert in <code>chrome.storage.local</code>.</li>
+    <li><strong>History</strong>: bis zu 50 letzte Checks (Domain als SHA-256-Hash, Zeitstempel, Severity-Zähler, Page-Title). Keine Klartext-URLs, keine Findings-Texte, keine Personendaten.</li>
+    <li><strong>Triggerwort-Highlights</strong>: DOM-Markierungen werden direkt im Browser angezeigt, nichts wird übertragen.</li>
+  </ul>
+
+  <h3>An die Prüf-API (<code>https://n8n.friedemann-schuetz.de/webhook/empco-check</code>)</h3>
+  <p>Nur wenn du <strong>aktiv</strong> auf „Prüfen" klickst oder einen markierten Text via Rechtsklick prüfen lässt, werden folgende Daten gesendet:</p>
+  <ul>
+    <li><strong>Textabschnitt</strong> des aktuellen DOM-Elements (max 2.000 Zeichen)</li>
+    <li><strong>Section-Typ</strong> (<code>hero_headline</code>, <code>body_content</code>, <code>navigation</code>, ...) zur Disambiguierung</li>
+    <li><strong>Seitenrolle</strong> (<code>startpage</code>, <code>sustainability</code>, <code>about</code>, ...)</li>
+    <li><strong>Umfeld-Kontext</strong> (1–2 angrenzende Sätze, max 500 Zeichen)</li>
+    <li><strong>SHA-256-Hash der Seiten-URL</strong> (nicht die URL selbst)</li>
+    <li>Sprache (<code>de</code>/<code>en</code>) und Sektor-Hinweis (optional)</li>
+  </ul>
+
+  <p><strong>Niemals übertragen werden:</strong></p>
+  <ul>
+    <li>Klartext-URLs der besuchten Seiten</li>
+    <li>Cookies, Login-Daten, Account-Informationen</li>
+    <li>Inhalte außerhalb des explizit geprüften Textabschnitts</li>
+    <li>IP-Adressen werden vom Server nur transient für die Anfrage benötigt (Standard-Webserver-Verhalten, kein Tracking).</li>
+  </ul>
+
+  <h2>2. Wer verarbeitet die Daten?</h2>
+
+  <p>Die Prüf-API läuft auf einem Server in Deutschland (Hetzner Cloud, Frankfurt) und wird vom Anbieter selbst betrieben. Für die Bewertung werden folgende Subdienstleister einbezogen:</p>
+
+  <table>
+    <thead>
+      <tr><th>Dienst</th><th>Zweck</th><th>Datenstandort</th><th>DPA</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>OpenAI Inc.</strong> (USA)</td><td>LLM-Bewertung (gpt-5.4-mini)</td><td>EU-Region / USA</td><td>DPA + EU-SCC</td></tr>
+      <tr><td><strong>Voyage AI</strong> (USA)</td><td>Embedding-Berechnung (voyage-law-2)</td><td>USA</td><td>DPA</td></tr>
+      <tr><td><strong>Cohere Inc.</strong> (KA)</td><td>Re-Ranking (rerank-v3.5)</td><td>EU/Kanada</td><td>DPA</td></tr>
+    </tbody>
+  </table>
+
+  <p>Der übermittelte Text wird zur Bewertung kurzzeitig an diese Dienste weitergeleitet, dort verarbeitet und das Ergebnis zurückgegeben. Die Anbieter speichern Anfragen gemäß ihren Vertragsbedingungen typischerweise 0–30 Tage zur Missbrauchserkennung.</p>
+
+  <h2>3. Wie lange werden Daten gespeichert?</h2>
+  <ul>
+    <li><strong>Lokal im Browser</strong>: dauerhaft, bis du die Extension deinstallierst oder die History/Einstellungen über das UI löschst.</li>
+    <li><strong>Server-Log der Prüf-API</strong>: technische Logs (Anfrage-Zeitpunkt, page_url_hash, Status, Severity-Summary) werden 30 Tage für Qualitätssicherung und Missbrauchserkennung gespeichert, anschließend automatisch gelöscht.</li>
+    <li><strong>Textinhalte werden nicht persistent gespeichert</strong> — sie werden nur für die Dauer der Bewertung im Speicher gehalten.</li>
+  </ul>
+
+  <h2>4. Telemetrie</h2>
+  <p>Optional. Standard: <strong>aus</strong>. Wenn du im Settings-Tab „Anonyme Nutzungsdaten teilen" aktivierst, werden zusätzlich folgende Daten übertragen:</p>
+  <ul>
+    <li>Anzahl geprüfter Sections pro Domain (gehasht)</li>
+    <li>Verteilung der Severities pro Check</li>
+    <li>Anonyme Session-ID (zufällig, keine Personenzuordnung)</li>
+  </ul>
+  <p>Diese Telemetrie dient ausschließlich der Verbesserung der Erkennungsregeln. Du kannst sie jederzeit wieder deaktivieren.</p>
+
+  <h2>5. Berechtigungen der Extension</h2>
+  <table>
+    <thead><tr><th>Permission</th><th>Wozu</th></tr></thead>
+    <tbody>
+      <tr><td><code>sidePanel</code></td><td>Anzeige der Findings-UI rechts neben der Seite</td></tr>
+      <tr><td><code>storage</code></td><td>Lokale Speicherung von Settings + History</td></tr>
+      <tr><td><code>contextMenus</code></td><td>Rechtsklick „EmpCo prüfen" auf markiertem Text</td></tr>
+      <tr><td><code>activeTab</code></td><td>Zugriff auf den aktuell fokussierten Tab (nur auf User-Aktion)</td></tr>
+      <tr><td><code>scripting</code></td><td>Einfügen des Content-Scripts in den aktiven Tab</td></tr>
+      <tr><td><code>tabs</code></td><td>URL des aktiven Tabs auslesen (für Hash + Page-Title)</td></tr>
+      <tr><td><code>host_permissions: https://n8n.friedemann-schuetz.de/*</code></td><td>API-Aufrufe an unsere Prüf-API</td></tr>
+    </tbody>
+  </table>
+  <p>Es werden <strong>keine</strong> <code>&lt;all_urls&gt;</code>-Berechtigungen angefragt. Die Extension kann nicht im Hintergrund auf beliebige Seiten zugreifen.</p>
+
+  <h2>6. Deine Rechte (DSGVO)</h2>
+  <p>Da die Extension nur SHA-256-Hashes und anonyme Textabschnitte verarbeitet, lassen sich Personendaten in den meisten Fällen nicht zuordnen. Falls du dennoch Auskunft, Berichtigung, Löschung oder Beschwerde nach Art. 15-22 DSGVO geltend machen möchtest, kontaktiere uns:</p>
+  <ul>
+    <li><strong>E-Mail</strong>: <a href="mailto:f.schuetz@posteo.de" style="color:var(--accent);text-decoration:none">f.schuetz@posteo.de</a></li>
+    <li><strong>Aufsichtsbehörde</strong>: <a href="https://www.ldi.nrw.de" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none">Landesbeauftragte für Datenschutz NRW</a></li>
+  </ul>
+
+  <h2>7. Cookies / Drittanbieter-Tracking</h2>
+  <p>Diese Extension setzt <strong>keine</strong> Cookies, nutzt <strong>keine</strong> Tracking-Pixel und integriert <strong>keine</strong> Werbe- oder Analytics-Dienste von Drittanbietern (kein Google Analytics, kein Facebook Pixel, etc.).</p>
+
+  <h2>8. Open Source</h2>
+  <p>Quellcode der Extension: auf Anfrage. Die Backend-Workflows laufen in <a href="https://n8n.io" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none">n8n</a> auf eigener Infrastruktur.</p>
+
+  <h2>9. Änderungen dieser Erklärung</h2>
+  <p>Wir aktualisieren diese Erklärung bei substanziellen Änderungen am Datenverarbeitungsvorgang. Die jeweils aktuelle Version ist immer unter <a href="https://friedemann-schuetz.de/empco-lupe-privacy" style="color:var(--accent);text-decoration:none">friedemann-schuetz.de/empco-lupe-privacy</a> abrufbar.</p>
+
+  <hr>
+  <footer>
+    <p><strong>Verantwortlich für die Datenverarbeitung im Sinne des Art. 4 Nr. 7 DSGVO:</strong></p>
+    <p>Friedemann Schütz · Essen, Deutschland · <a href="mailto:f.schuetz@posteo.de">f.schuetz@posteo.de</a></p>
+    <a class="back" href="https://friedemann-schuetz.de">&larr; Zurück zu friedemann-schuetz.de</a>
+  </footer>
+</div>
+</body>
+</html>

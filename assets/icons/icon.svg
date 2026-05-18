@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="ring" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00B8D4"/>
+      <stop offset="100%" stop-color="#006E82"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="22" fill="#f8fafc"/>
+  <circle cx="54" cy="54" r="34" fill="#d2f5fc"/>
+  <circle cx="54" cy="54" r="36" fill="none" stroke="url(#ring)" stroke-width="11"/>
+  <text x="54" y="69" font-family="-apple-system,Segoe UI,Roboto,Arial,sans-serif" font-size="44" font-weight="700"
+        text-anchor="middle" fill="#006E82">E</text>
+  <line x1="80" y1="80" x2="108" y2="108" stroke="#006E82" stroke-width="16" stroke-linecap="round"/>
+  <line x1="80" y1="80" x2="108" y2="108" stroke="#00B8D4" stroke-width="12" stroke-linecap="round"/>
+</svg>

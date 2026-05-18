@@ -1,0 +1,16 @@
+node_modules/
+.output/
+.wxt/
+stats.html
+*.zip
+.vscode/
+.DS_Store
+
+# Build outputs
+*.zip
+
+# screenshots-raw (originals user took, not for repo)
+store/screenshots-raw/
+
+# composite scripts output (generated)
+store/screenshots/
