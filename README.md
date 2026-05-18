@@ -88,6 +88,10 @@ npm run zip       # ZIP für Store-Submission
 npm run compile   # TypeScript-Check
 ```
 
+## Roadmap
+
+Geplante Features und bekannte Limitations: [ROADMAP.md](ROADMAP.md).
+
 ## Lizenz
 
 [MIT](LICENSE) — frei für eigene Nutzung, Forks willkommen.
