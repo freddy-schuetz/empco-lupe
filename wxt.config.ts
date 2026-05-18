@@ -19,7 +19,7 @@ export default defineConfig({
   manifest: {
     name: "EmpCo-Lupe",
     description: "Greenwashing-Check für Marketing-Texte nach EU-EmpCo-Richtlinie 2024/825 + UWG. Side-Project von Friedemann Schütz.",
-    version: "0.1.0",
+    version: "0.2.0",
     permissions: ["sidePanel", "storage", "contextMenus", "activeTab", "scripting", "tabs"],
     host_permissions: ["https://n8n.friedemann-schuetz.de/*"],
     icons: {

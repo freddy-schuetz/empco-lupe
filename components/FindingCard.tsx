@@ -1,14 +1,17 @@
 import * as React from "react";
-import { Copy, ChevronDown, ChevronRight, Locate } from "lucide-react";
+import { Copy, ChevronDown, ChevronRight, Locate, ThumbsUp, ThumbsDown } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { UiFinding } from "@/lib/types";
+import { sendFeedback, findingId } from "@/lib/feedback";
 
 interface Props {
   finding: UiFinding;
   index: number;
   onJump?: (sectionId: string) => void;
+  pageUrlHash?: string;
+  extensionVersion?: string;
 }
 
 function copyToClipboard(text: string) {
@@ -38,11 +41,33 @@ const PAGE_LABEL: Record<string, string> = {
   other: "Andere",
 };
 
-export const FindingCard: React.FC<Props> = ({ finding, index, onJump }) => {
+export const FindingCard: React.FC<Props> = ({ finding, index, onJump, pageUrlHash, extensionVersion }) => {
   const [openCitations, setOpenCitations] = React.useState(false);
+  const [feedbackSent, setFeedbackSent] = React.useState<"up" | "down" | null>(null);
 
   const sevVariant = finding.severity as "high" | "med" | "low";
   const sevLabel = finding.severity === "high" ? "HOCH" : finding.severity === "med" ? "MITTEL" : "NIEDRIG";
+
+  const fid = React.useMemo(
+    () => findingId(finding.rule_id, finding.quote, finding.section_id),
+    [finding.rule_id, finding.quote, finding.section_id],
+  );
+
+  function submitFeedback(thumb: "up" | "down") {
+    if (feedbackSent) return;
+    setFeedbackSent(thumb);
+    void sendFeedback({
+      finding_id: fid,
+      thumb,
+      rule_id: finding.rule_id,
+      severity: finding.severity,
+      quote: finding.quote?.slice(0, 200),
+      section_type: finding.section_type,
+      page_role: finding.page_role,
+      page_url_hash: pageUrlHash,
+      extension_version: extensionVersion,
+    });
+  }
 
   return (
     <Card className="overflow-hidden">
@@ -119,6 +144,36 @@ export const FindingCard: React.FC<Props> = ({ finding, index, onJump }) => {
             </ul>
           </div>
         )}
+
+        <div className="flex items-center gap-2 border-t border-border pt-2">
+          <span className="text-[10px] text-muted-foreground">
+            {feedbackSent ? "Danke fürs Feedback!" : "Hilfreich?"}
+          </span>
+          <div className="ml-auto flex items-center gap-1">
+            <Button
+              variant={feedbackSent === "up" ? "secondary" : "ghost"}
+              size="icon"
+              className="h-6 w-6"
+              onClick={() => submitFeedback("up")}
+              disabled={!!feedbackSent}
+              title="Hilfreich"
+              aria-label="Hilfreich"
+            >
+              <ThumbsUp className="h-3 w-3" />
+            </Button>
+            <Button
+              variant={feedbackSent === "down" ? "secondary" : "ghost"}
+              size="icon"
+              className="h-6 w-6"
+              onClick={() => submitFeedback("down")}
+              disabled={!!feedbackSent}
+              title="Nicht hilfreich / False Positive"
+              aria-label="Nicht hilfreich"
+            >
+              <ThumbsDown className="h-3 w-3" />
+            </Button>
+          </div>
+        </div>
 
       </CardContent>
     </Card>

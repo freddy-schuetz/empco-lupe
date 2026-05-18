@@ -25,6 +25,7 @@ import { getHistory, getSettings, pushHistory, updateSettings, clearHistory } fr
 
 const MAX_API_CALLS_PER_SCAN = 30;
 const BATCH_CONCURRENCY = 5;
+const EXTENSION_VERSION = "0.2.0";
 
 // --- helpers ------------------------------------------------------------------------------------
 
@@ -422,7 +423,7 @@ export const App: React.FC = () => {
                     <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                       Selektions-Check
                     </div>
-                    <FindingCard finding={selectionResult} index={0} />
+                    <FindingCard finding={selectionResult} index={0} pageUrlHash={scan?.page_url_hash} extensionVersion={EXTENSION_VERSION} />
                     <Separator />
                   </div>
                 )}
@@ -436,7 +437,7 @@ export const App: React.FC = () => {
                 {scan && scan.findings.length > 0 && (
                   <div className="space-y-3">
                     {scan.findings.map((f, i) => (
-                      <FindingCard key={f.section_id + i} finding={f} index={i} onJump={jumpToSection} />
+                      <FindingCard key={f.section_id + i} finding={f} index={i} onJump={jumpToSection} pageUrlHash={scan?.page_url_hash} extensionVersion={EXTENSION_VERSION} />
                     ))}
                   </div>
                 )}
