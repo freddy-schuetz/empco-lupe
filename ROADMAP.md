@@ -18,14 +18,16 @@ Bekannte Verbesserungen aus realem Testing:
 
 Diese Verbesserungen liegen im n8n-Workflow auf dem Server — Extension-Code bleibt unverändert, Updates erreichen alle User automatisch beim nächsten Check:
 
-- **v3 + v4 (live 2026-05-19, regressions-getestet)**:
-  - Selbst-Siegel-Verstöße werden korrekt erkannt (hauseigene Siegel ohne Drittprüfung)
-  - Anerkannte Drittzertifikate (EU Ecolabel, EMAS, GreenSign, DEHOGA Umweltcheck, Viabono, Green Key, GSTC, Travelife, Blauer Engel, Österreichisches Umweltzeichen) immunisieren den Satz korrekt — keine False Positives auf Hotels die echte Cert-Substantiierung kommunizieren
-  - Konsistente Rule-IDs zwischen Runs (JSON-Schema Enum, 11 fixe Werte)
-  - Marketing-taugliche statt bürokratischer Umformulierungen, mit Pflicht zu konkreten Bezügen aus Original
-  - Anti-Halluzinations-Klauseln gegen erfundene Orte/Daten und Cross-Context-Detail-Leakage
-  - ~22 % schneller (Mean Latency 4.7 s)
-  - Verifiziert mit 20 produktiven Inputs + 5 synthetischen Cert-Tests + Edge-Cases + Determinismus-Test (siehe `workflows/empco/test_v3_regression.py` im Repo).
+- **v3 + v4 + v5 (live 2026-05-19, user-verifiziert auf zwei realen DMO-Pages)**:
+  - **Selbst-Siegel-Verstöße** werden korrekt erkannt (hauseigene Siegel ohne Drittprüfung)
+  - **Anerkannte Drittzertifikate** (EU Ecolabel, EMAS, GreenSign, DEHOGA Umweltcheck, Viabono, Green Key, GSTC, Travelife, Blauer Engel, Österreichisches Umweltzeichen) werden respektiert — Sätze die solche Cert namentlich nennen werden nicht hart bewertet (Severity max `low`)
+  - **Anti-Verbatim-Regel** (Step 5): Alternativen wiederholen niemals die geflaggte pauschale Aussage 1:1. Bei „regionale Produkte" landen Vorschläge wie „Tiroler Spezialitäten" oder „Produkte vom Hof XY" statt einer Wiederholung des Verstoßes
+  - **Severity-Cap bei Cert-Erwähnung im Satz**: kein BLOCK mehr auf cert-substantiierten Pages — Score-Niveau bleibt aussagekräftig statt panisch
+  - **Konsistente Rule-IDs** zwischen Runs (JSON-Schema Enum, 11 fixe Werte)
+  - **Marketing-taugliche Alternativen** statt bürokratischer Umformulierungen, mit Pflicht zu konkreten Bezügen aus Original
+  - **Anti-Halluzinations-Klauseln** gegen erfundene Orte/Daten und Cross-Context-Detail-Leakage
+  - **~22 % schneller** (Mean Latency 4.7 s)
+  - Verifiziert mit 20 produktiven Inputs + 5 synthetischen Cert-Tests + 17 Extension-Use-Cases + 2 reale DMO-Page-Tests (tirol.at/nachhaltige-unterkuenfte: 65/100 WARN; thueringen-entdecken.de/nachhaltig: 80/100 WARN). Test-Skripte im Repo unter `workflows/empco/`.
 
 ## Phase 2 (später, nach Demand-Signal aus Waitlist)
 
