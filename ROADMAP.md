@@ -18,6 +18,17 @@ Bekannte Verbesserungen aus realem Testing:
 
 Diese Verbesserungen liegen im n8n-Workflow auf dem Server — Extension-Code bleibt unverändert, Updates erreichen alle User automatisch beim nächsten Check:
 
+- **v6 + v7 + v8 (live 2026-05-19, BH-Best-Practice-Integration)**:
+  - **Juristische Tiefe**: rule_ids zitieren jetzt präzise Anhang-I-Normen (`EMPCO-ANHANG-I-4C` für Klimakompensation, `4A` für allg. Umweltaussagen, `4D` für Zukunftsversprechen, `2A` für Selbst-Siegel) statt generischer Kategorien. Anwalts-fit.
+  - **Prüfreihenfolge**: Anhang I → Art. 6 → Art. 7 → UWG §5 — strikte Hierarchie wie BH.
+  - **`evidence_required[]`**: pro Finding 2–4 konkret-belegbare Items ("CO2-Bilanz Scope 1+2 nach GHG Protocol", "Audit-URL des Aufforstungs-Projekts"). User-Checkliste statt vager Verbesserungs-Aufforderung.
+  - **Drei Eskalations-Varianten** im neuen `suggestions{conservative, with_evidence, certified}`-Objekt — User wählt Risikolevel:
+    - `conservative`: ohne Belegpflicht, streicht Claim oder ersetzt durch neutrale Beschreibung
+    - `with_evidence`: behält Werbewirkung, mit Beleganker `[X % seit Jahr]` / `[Scope 1+2]`
+    - `certified`: stärkster Claim mit Drittzertifikat-Verweis (EU Ecolabel, GreenSign, Travelife Gold)
+  - **Vollständig backward-kompatibel**: Extension v0.1/v0.2 lesen weiter `compliant_alternatives` (Backend synthetisiert 3 Strings aus suggestions). v0.3 (Future) wird suggestions + evidence_required nativ rendern.
+  - Verifiziert: 17/17 Extension-Cases bestehen, 0 Verbatim-Wiederholungen auf 25 Tirol-Findings, Tirol-Page-Score weiter im WARN-Bereich.
+
 - **v3 + v4 + v5 (live 2026-05-19, user-verifiziert auf zwei realen DMO-Pages)**:
   - **Selbst-Siegel-Verstöße** werden korrekt erkannt (hauseigene Siegel ohne Drittprüfung)
   - **Anerkannte Drittzertifikate** (EU Ecolabel, EMAS, GreenSign, DEHOGA Umweltcheck, Viabono, Green Key, GSTC, Travelife, Blauer Engel, Österreichisches Umweltzeichen) werden respektiert — Sätze die solche Cert namentlich nennen werden nicht hart bewertet (Severity max `low`)
