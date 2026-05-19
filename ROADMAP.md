@@ -18,6 +18,12 @@ Bekannte Verbesserungen aus realem Testing:
 
 Diese Verbesserungen liegen im n8n-Workflow auf dem Server — Extension-Code bleibt unverändert, Updates erreichen alle User automatisch beim nächsten Check:
 
+- **v9 (live 2026-05-19, Konsolidierung + Severity-Anker)**:
+  - **Finding-Konsolidierung pro Satz**: mehrere pauschale Aussagen DERSELBEN rule_id im selben Satz werden zu EINEM Finding zusammengefasst. Reduziert UI-Noise massiv (Tirol: 27→20 Findings, ~26% weniger).
+  - **Erweiterte Off-Topic-Filter**: catched neue Patterns wie „ohne klaren, eigenständigen Umwelt-Claim", „redaktionelle Anspielung", „Erlebnis- und Komfortwerbung" — der LLM selbst sagt diese Phrasen häufig, die Findings werden jetzt korrekt gedropt.
+  - **Severity-Anker** überschreibt Konsolidierung: schwere Verstöße bleiben high. EMPCO-ANHANG-I-4C (Klimakompensation), 4D (Zukunftsversprechen), 2A (Selbst-Siegel) sind mindestens high. 4A/4B mindestens med. Auffang-Normen low.
+  - Newsletter mit „klimaneutral + 100% CO2-Kompensation" wird jetzt korrekt block/75 mit 1× high (vorher fälschlich warn/95 mit low durch Konsolidierungs-Verwässerung).
+
 - **v6 + v7 + v8 (live 2026-05-19, BH-Best-Practice-Integration)**:
   - **Juristische Tiefe**: rule_ids zitieren jetzt präzise Anhang-I-Normen (`EMPCO-ANHANG-I-4C` für Klimakompensation, `4A` für allg. Umweltaussagen, `4D` für Zukunftsversprechen, `2A` für Selbst-Siegel) statt generischer Kategorien. Anwalts-fit.
   - **Prüfreihenfolge**: Anhang I → Art. 6 → Art. 7 → UWG §5 — strikte Hierarchie wie BH.
