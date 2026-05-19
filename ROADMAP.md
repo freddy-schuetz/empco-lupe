@@ -18,8 +18,14 @@ Bekannte Verbesserungen aus realem Testing:
 
 Diese Verbesserungen liegen im n8n-Workflow auf dem Server — Extension-Code bleibt unverändert, Updates erreichen alle User automatisch beim nächsten Check:
 
-- **v3 (live 2026-05-19)**: Selbst-Siegel-Erkennung gefixt, Alternativen-Konsistenz via deterministischem Seed, marketing-taugliche statt bürokratischer Umformulierungen, Anti-Halluzinations-Klausel, Drittzertifikat-Schonung.
-- **v4 (geplant)**: Wenn ein konkretes Drittzertifikat (EU Ecolabel, EMAS, etc.) im Satz erwähnt wird, kein Finding mehr darauf erzeugen — das IST die Substantiierung. Plus Cross-Context-Halluzinations-Schutz.
+- **v3 + v4 (live 2026-05-19, regressions-getestet)**:
+  - Selbst-Siegel-Verstöße werden korrekt erkannt (hauseigene Siegel ohne Drittprüfung)
+  - Anerkannte Drittzertifikate (EU Ecolabel, EMAS, GreenSign, DEHOGA Umweltcheck, Viabono, Green Key, GSTC, Travelife, Blauer Engel, Österreichisches Umweltzeichen) immunisieren den Satz korrekt — keine False Positives auf Hotels die echte Cert-Substantiierung kommunizieren
+  - Konsistente Rule-IDs zwischen Runs (JSON-Schema Enum, 11 fixe Werte)
+  - Marketing-taugliche statt bürokratischer Umformulierungen, mit Pflicht zu konkreten Bezügen aus Original
+  - Anti-Halluzinations-Klauseln gegen erfundene Orte/Daten und Cross-Context-Detail-Leakage
+  - ~22 % schneller (Mean Latency 4.7 s)
+  - Verifiziert mit 20 produktiven Inputs + 5 synthetischen Cert-Tests + Edge-Cases + Determinismus-Test (siehe `workflows/empco/test_v3_regression.py` im Repo).
 
 ## Phase 2 (später, nach Demand-Signal aus Waitlist)
 
