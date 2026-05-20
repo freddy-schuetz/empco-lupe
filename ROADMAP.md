@@ -13,6 +13,9 @@ Bekannte Verbesserungen aus realem Testing:
 
 - **Multi-Finding im Selektions-Check** — aktuell wird bei langem markierten Text mit mehreren Verstößen nur das stärkste Finding angezeigt. Liste aller Findings rendern, wie der Page-Scan es schon tut.
 - **iframe-aware Status** — in Editor-Iframes (Mailjet, Gmail-Compose, TinyMCE, CKEditor) erreicht der Page-Scan den Inhalt nicht. Aktuell zeigt das Side-Panel dann fälschlich „100/100 UNAUFFÄLLIG". Stattdessen Hinweis: „Page-Scan kann auf dieser Seite nicht greifen — Text markieren + Rechtsklick → EmpCo prüfen."
+- **Page-Scan-Abdeckung transparenter** — der Page-Scan prüft nur Sections mit Umwelt-Schlüsselwörtern, nicht die ganze Seite (Kosten-/Zeit-Grenze: eine ganze Seite = zu viele API-Calls). Die lokale Schlüsselwort-Liste wird mit der erweiterten Backend-Liste re-synct, und die Anzeige wird ehrlicher: „X Sections mit Umwelt-Bezug geprüft (von Y gescannt)" statt „X geprüfte Sections".
+- **Drei Eskalations-Varianten + Belege-Checkliste** — das Backend liefert seit v6–v8 pro Finding `conservative`/`with_evidence`/`certified`-Umformulierungen plus eine `evidence_required`-Liste. Die UI rendert das künftig als drei klar gelabelte Stufen mit Checkliste.
+- **Determinismus auf Grenzfall-Texten** — bei juristisch echten 50/50-Texten kann derselbe Text zwischen „clean" und „warn" wechseln. Geplanter Fix: `seed`-Parameter über direkten OpenAI-API-Call (n8ns Standard-Node unterstützt kein `seed`). Liefert gleicher-Input-gleicher-Output.
 
 ## Backend-Verbesserungen (live, beeinflussen alle Extension-Versionen sofort)
 
