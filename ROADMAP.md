@@ -1,6 +1,6 @@
 # Roadmap
 
-Status zum 2026-05-18.
+Status zum 2026-05-20.
 
 ## v0.2.0 (current — GitHub Release)
 
@@ -20,6 +20,11 @@ Bekannte Verbesserungen aus realem Testing:
 ## Backend-Verbesserungen (live, beeinflussen alle Extension-Versionen sofort)
 
 Diese Verbesserungen liegen im n8n-Workflow auf dem Server — Extension-Code bleibt unverändert, Updates erreichen alle User automatisch beim nächsten Check:
+
+- **v10 (live 2026-05-20, aus erster echter User-Nutzung)**:
+  - **Selektions-Check geht immer zum LLM**: ein bewusster „EmpCo prüfen"-Rechtsklick wird nie mehr vom Schlüsselwort-Cost-Gate übersprungen. Wirkt sofort für alle Versionen inkl. v0.1.0 (reiner Backend-Fix).
+  - **Erweiterte Backend-Schlüsselwortliste**: weiche CSR-Vokabeln (`ressourcen`, `umweltbewusst`, `klimaschutz`, `co2`, `emission`, `fußabdruck`, `naturverbunden`, `ökostrom` …), die „EmpCo-evasive" Texte nutzen, um die Buzzwords zu umgehen.
+  - **Satzweise Prüfung**: ein Umwelt-Claim wird nicht mehr von operativen/sozialen Sätzen drumherum „verdünnt" — jeder Satz wird eigenständig bewertet.
 
 - **v9 (live 2026-05-19, Konsolidierung + Severity-Anker)**:
   - **Finding-Konsolidierung pro Satz**: mehrere pauschale Aussagen DERSELBEN rule_id im selben Satz werden zu EINEM Finding zusammengefasst. Reduziert UI-Noise massiv (Tirol: 27→20 Findings, ~26% weniger).
