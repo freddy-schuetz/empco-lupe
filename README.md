@@ -18,10 +18,12 @@ Browser-Extension für den Greenwashing-Check von Marketing-Texten nach **EU-Emp
 ### Aus dem Chrome Web Store *(empfohlen)*
 **[EmpCo-Lupe im Chrome Web Store installieren →](https://chromewebstore.google.com/detail/empco-lupe/jodplelefklimbeegiekopnpbgaefdob)**
 
-Funktioniert auch in allen Chromium-Browsern (Brave, Vivaldi, Opera, Arc).
+Funktioniert auch in allen Chromium-Browsern: Brave, Vivaldi, Opera, Arc.
 
-### Aus dem Microsoft Edge Add-ons Store
-*In Review — folgt in Kürze.*
+### In Microsoft Edge
+Edge-Nutzer können die Extension **ab sofort** aus dem Chrome Web Store installieren — beim ersten Mal fragt Edge, ob „Erweiterungen aus anderen Stores" zugelassen werden sollen (einmalig bestätigen).
+
+Die native Version im **Microsoft Edge Add-ons Store** ist eingereicht und folgt in Kürze.
 
 ### Direkt-Installation aus dieser Release (Entwickler / Early Tester)
 
