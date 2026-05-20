@@ -14,3 +14,7 @@ store/screenshots-raw/
 
 # composite scripts output (generated)
 store/screenshots/
+
+# Python caches (asset generation scripts)
+__pycache__/
+*.pyc

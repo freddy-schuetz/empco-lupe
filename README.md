@@ -15,13 +15,17 @@ Browser-Extension für den Greenwashing-Check von Marketing-Texten nach **EU-Emp
 
 ## Installation
 
-### Aus dem Chrome Web Store
-*Coming soon — derzeit im Review. [Bei Launch benachrichtigen lassen](https://friedemann-schuetz.de/#usecases).*
+### Aus dem Chrome Web Store *(empfohlen)*
+**[EmpCo-Lupe im Chrome Web Store installieren →](https://chromewebstore.google.com/detail/empco-lupe/jodplelefklimbeegiekopnpbgaefdob)**
+
+Funktioniert auch in allen Chromium-Browsern (Brave, Vivaldi, Opera, Arc).
 
 ### Aus dem Microsoft Edge Add-ons Store
-*Coming soon.*
+*In Review — folgt in Kürze.*
 
 ### Direkt-Installation aus dieser Release (Entwickler / Early Tester)
+
+Für alle, die die jeweils neueste Version vor dem Store-Rollout testen wollen:
 
 1. ZIP aus dem [Latest Release](../../releases/latest) herunterladen und entpacken
 2. Chrome / Edge öffnen → `chrome://extensions/` bzw. `edge://extensions/`
@@ -30,7 +34,7 @@ Browser-Extension für den Greenwashing-Check von Marketing-Texten nach **EU-Emp
 5. Lupen-Icon in der Toolbar anpinnen
 6. **`Alt+E`** oder Klick auf das Icon öffnet das Side-Panel
 
-> ⚠️ Bei Sideload zeigt Chrome bei jedem Start eine Warnung über „Developer-mode extensions". Solange ungelöste Permissions im Store-Review hängen, ist das normal. Sobald die Store-Version live ist, wechsle bitte dorthin (automatische Updates, kein Banner).
+> ⚠️ Bei Sideload zeigt Chrome bei jedem Start eine Warnung über „Developer-mode extensions". Für den normalen Gebrauch nimm die Store-Version (automatische Updates, kein Banner).
 
 ## Backend / Architektur
 

@@ -7,8 +7,9 @@ Search-Keywords (max 7), Hardware/Accessibility-Felder.
 ---
 
 ## Package upload
-- **Datei**: `extensions/empco-lupe/.output/empco-lupe-0.1.0-chrome.zip` (105 KB)
+- **Datei**: `extensions/empco-lupe/.output/empco-lupe-0.2.0-chrome.zip` (105 KB)
 - **Identisches MV3-ZIP wie Chrome** — Edge akzeptiert es direkt, keine Anpassung nötig
+- v0.2.0 enthält den Feedback-Loop (👍/👎 pro Finding); Edge startet damit gleich auf aktuellem Stand
 
 ---
 
